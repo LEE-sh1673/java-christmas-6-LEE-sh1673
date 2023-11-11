@@ -56,4 +56,10 @@ public class OrderMenus {
     private static boolean isAllBeverage(final List<OrderMenu> menus) {
         return menus.stream().allMatch(OrderMenu::isBeverage);
     }
+
+    public long calculateTotalPrize() {
+        return menus.stream()
+                .mapToLong(OrderMenu::getPrize)
+                .sum();
+    }
 }

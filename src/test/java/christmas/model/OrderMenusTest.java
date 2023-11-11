@@ -1,12 +1,17 @@
 package christmas.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.exception.ErrorType;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class OrderMenusTest {
 
@@ -41,5 +46,29 @@ class OrderMenusTest {
         assertThatThrownBy(() -> new OrderMenus(List.of("제로콜라-3", "레드와인-4", "샴페인-10")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorType.ONLY_BEVERAGE.getMessage());
+    }
+
+    @DisplayName("총 주문 금액을 구한다.")
+    @ParameterizedTest
+    @MethodSource("generateMenuNamesWithTotalPrice")
+    void givenOrderMenus_Then_TotalPriceReturns(
+            final List<String> menuNames,
+            final long totalPrize
+    ) {
+        final OrderMenus orderMenus = new OrderMenus(menuNames);
+        assertThat(orderMenus.calculateTotalPrize()).isEqualTo(totalPrize);
+    }
+
+    private static Stream<Arguments> generateMenuNamesWithTotalPrice() {
+        return Stream.of(
+                Arguments.of(
+                        List.of("바비큐립-1", "티본스테이크-1", "초코케이크-2", "제로콜라-1"),
+                        142000L
+                ),
+                Arguments.of(
+                        List.of("타파스-1", "제로콜라-1"),
+                        8500L
+                )
+        );
     }
 }
