@@ -24,7 +24,7 @@ public enum Menu {
 
     ZERO_COKE("제로콜라", 3000, MenuType.BEVERAGE),
     RED_WINE("레드와인", 60000, MenuType.BEVERAGE),
-    CHAMPAGNE("삼폐인", 25000, MenuType.BEVERAGE);
+    CHAMPAGNE("샴페인", 25000, MenuType.BEVERAGE);
 
     private static final Map<String, Menu> nameToMenus = Arrays.stream(values()).collect(
             toMap(
