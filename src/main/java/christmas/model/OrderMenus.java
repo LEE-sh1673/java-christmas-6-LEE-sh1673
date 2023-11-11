@@ -2,31 +2,30 @@ package christmas.model;
 
 import static christmas.exception.ErrorType.INVALID_ORDER;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.regex.Pattern;
+import java.util.Set;
 
 public class OrderMenus {
 
-    private static final Pattern MENU_PATTERN = Pattern.compile("\\S+-[0-9]+");
+    private final List<OrderMenu> menus;
 
     OrderMenus(final List<String> namesWithQuantity) {
-        validateFormat(namesWithQuantity);
+        this.menus = mapMenus(namesWithQuantity);
+        validateDuplicate(menus);
     }
 
-    private void validateFormat(final List<String> namesWithQuantity) {
-        validateNullOrEmpty(namesWithQuantity);
-        for (final String name : namesWithQuantity) {
-            if (!MENU_PATTERN.matcher(name).matches()) {
-                throw new IllegalArgumentException(INVALID_ORDER.getMessage());
-            }
-        }
+    private List<OrderMenu> mapMenus(final List<String> namesWithQuantity) {
+        return namesWithQuantity.stream()
+                .map(OrderMenu::new)
+                .toList();
     }
 
-    private void validateNullOrEmpty(final List<String> namesWithQuantity) {
-        for (final String name : namesWithQuantity) {
-            if (name == null || name.isBlank()) {
-                throw new IllegalArgumentException(INVALID_ORDER.getMessage());
-            }
+    private void validateDuplicate(final List<OrderMenu> menus) {
+        final Set<OrderMenu> uniqueMenus = new HashSet<>(menus);
+
+        if (menus.size() != uniqueMenus.size()) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 }
