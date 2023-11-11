@@ -21,7 +21,17 @@ class OrderMenusTest {
     @DisplayName("중복되지 않은 메뉴를 입력하는 경우 예외가 발생하지 않는다.")
     @Test
     void givenMenuNonDuplicated_Then_NoExceptionOccurs() {
-        assertThatCode(() -> new OrderMenus(List.of("티본스테이크-1", "시저샐러드-1")))
+        assertThatCode(() ->
+                new OrderMenus(List.of("바비큐립-3", "시저샐러드-4", "초코케이크-8", "제로콜라-5")))
                 .doesNotThrowAnyException();
+    }
+
+    @DisplayName("전체 메뉴의 개수가 20개를 초과하는 경우 예외가 발생한다.")
+    @Test
+    void givenMenuSizeExceeded_Then_ExceptionOccurs() {
+        assertThatThrownBy(() ->
+                new OrderMenus(List.of("바비큐립-3", "시저샐러드-4", "초코케이크-8", "제로콜라-6")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.MAX_ORDER_EXCEEDED.getMessage());
     }
 }
