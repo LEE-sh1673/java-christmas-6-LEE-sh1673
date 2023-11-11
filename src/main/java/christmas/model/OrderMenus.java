@@ -2,6 +2,7 @@ package christmas.model;
 
 import static christmas.exception.ErrorType.INVALID_ORDER;
 import static christmas.exception.ErrorType.MAX_ORDER_EXCEEDED;
+import static christmas.exception.ErrorType.ONLY_BEVERAGE;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +18,7 @@ public class OrderMenus {
         this.menus = mapMenus(namesWithQuantity);
         validateDuplicate(menus);
         validateSize(menus);
+        validateMenus(menus);
     }
 
     private List<OrderMenu> mapMenus(final List<String> namesWithQuantity) {
@@ -43,5 +45,15 @@ public class OrderMenus {
 
     private int calculateTotalQuantity(final List<OrderMenu> menus) {
         return menus.stream().mapToInt(OrderMenu::getQuantity).sum();
+    }
+
+    private void validateMenus(final List<OrderMenu> menus) {
+        if (isAllBeverage(menus)) {
+            throw new IllegalArgumentException(ONLY_BEVERAGE.getMessage());
+        }
+    }
+
+    private static boolean isAllBeverage(final List<OrderMenu> menus) {
+        return menus.stream().allMatch(OrderMenu::isBeverage);
     }
 }

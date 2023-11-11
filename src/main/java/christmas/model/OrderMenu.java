@@ -3,6 +3,7 @@ package christmas.model;
 import static christmas.exception.ErrorType.INVALID_ORDER;
 import static christmas.exception.ErrorType.MAX_ORDER_EXCEEDED;
 
+import christmas.MenuType;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -50,6 +51,10 @@ public class OrderMenu {
 
     public long getPrize() {
         return menu.getPrize() * quantity;
+    }
+
+    public boolean isBeverage() {
+        return menu.getCategory() == MenuType.BEVERAGE;
     }
 
     @Override

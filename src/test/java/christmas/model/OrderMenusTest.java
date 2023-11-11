@@ -34,4 +34,12 @@ class OrderMenusTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorType.MAX_ORDER_EXCEEDED.getMessage());
     }
+
+    @DisplayName("음료만 주문하는 경우 예외가 발생한다.")
+    @Test
+    void givenOnlyBeverage_Then_ExceptionOccurs() {
+        assertThatThrownBy(() -> new OrderMenus(List.of("제로콜라-3", "레드와인-4", "샴페인-10")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.ONLY_BEVERAGE.getMessage());
+    }
 }
