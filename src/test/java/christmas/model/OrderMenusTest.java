@@ -45,7 +45,7 @@ class OrderMenusTest {
     void givenOnlyBeverage_Then_ExceptionOccurs() {
         assertThatThrownBy(() -> new OrderMenus(List.of("제로콜라-3", "레드와인-4", "샴페인-10")))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorType.ONLY_BEVERAGE.getMessage());
+                .hasMessageContaining(ErrorType.ONLY_BEVERAGE_ORDERED.getMessage());
     }
 
     @DisplayName("총 주문 금액을 구한다.")

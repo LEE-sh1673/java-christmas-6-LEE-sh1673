@@ -2,7 +2,7 @@ package christmas.model;
 
 import static christmas.exception.ErrorType.INVALID_ORDER;
 import static christmas.exception.ErrorType.MAX_ORDER_EXCEEDED;
-import static christmas.exception.ErrorType.ONLY_BEVERAGE;
+import static christmas.exception.ErrorType.ONLY_BEVERAGE_ORDERED;
 
 import java.util.HashSet;
 import java.util.List;
@@ -49,7 +49,7 @@ public class OrderMenus {
 
     private void validateMenus(final List<OrderMenu> menus) {
         if (isAllBeverage(menus)) {
-            throw new IllegalArgumentException(ONLY_BEVERAGE.getMessage());
+            throw new IllegalArgumentException(ONLY_BEVERAGE_ORDERED.getMessage());
         }
     }
 
