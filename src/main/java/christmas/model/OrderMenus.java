@@ -16,9 +16,9 @@ public class OrderMenus {
 
     OrderMenus(final List<String> namesWithQuantity) {
         this.menus = mapMenus(namesWithQuantity);
-        validateDuplicate(menus);
-        validateSize(menus);
-        validateMenus(menus);
+        validateDuplicate();
+        validateSize();
+        validateMenus();
     }
 
     private List<OrderMenu> mapMenus(final List<String> namesWithQuantity) {
@@ -27,7 +27,7 @@ public class OrderMenus {
                 .toList();
     }
 
-    private void validateDuplicate(final List<OrderMenu> menus) {
+    private void validateDuplicate() {
         final Set<OrderMenu> uniqueMenus = new HashSet<>(menus);
 
         if (menus.size() != uniqueMenus.size()) {
@@ -35,26 +35,26 @@ public class OrderMenus {
         }
     }
 
-    private void validateSize(final List<OrderMenu> menus) {
-        final int totalQuantity = calculateTotalQuantity(menus);
+    private void validateSize() {
+        final int totalQuantity = calculateTotalQuantity();
 
         if (totalQuantity > MAX_QUANTITY) {
             throw new IllegalArgumentException(MAX_ORDER_EXCEEDED.getMessage());
         }
     }
 
-    private int calculateTotalQuantity(final List<OrderMenu> menus) {
+    private int calculateTotalQuantity() {
         return menus.stream().mapToInt(OrderMenu::getQuantity).sum();
     }
 
-    private void validateMenus(final List<OrderMenu> menus) {
-        if (isAllBeverage(menus)) {
+    private void validateMenus() {
+        if (isAllBeverage()) {
             throw new IllegalArgumentException(ONLY_BEVERAGE_ORDERED.getMessage());
         }
     }
 
-    private static boolean isAllBeverage(final List<OrderMenu> menus) {
-        return menus.stream().allMatch(OrderMenu::isBeverage);
+    private boolean isAllBeverage() {
+        return menus.stream().allMatch(menu -> menu.matchType(MenuType.BEVERAGE));
     }
 
     public long calculateTotalPrize() {

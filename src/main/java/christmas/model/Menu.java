@@ -61,7 +61,7 @@ public enum Menu {
         return price;
     }
 
-    public MenuType getCategory() {
-        return menuType;
+    public boolean matchType(final MenuType menuType) {
+        return this.menuType == menuType;
     }
 }

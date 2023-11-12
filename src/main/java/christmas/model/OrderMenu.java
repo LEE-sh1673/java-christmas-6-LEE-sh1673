@@ -47,8 +47,8 @@ public class OrderMenu {
         return menu.getPrize() * quantity;
     }
 
-    public boolean isBeverage() {
-        return menu.getCategory() == MenuType.BEVERAGE;
+    public boolean matchType(final MenuType menuType) {
+        return menu.matchType(menuType);
     }
 
     @Override
