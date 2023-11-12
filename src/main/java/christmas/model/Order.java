@@ -16,4 +16,8 @@ public class Order {
     public long calculateTotalPrize() {
         return menus.calculateTotalPrize();
     }
+
+    public int getDay() {
+        return date.getDay();
+    }
 }

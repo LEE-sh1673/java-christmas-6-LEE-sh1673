@@ -23,4 +23,8 @@ public class OrderDate {
     public static OrderDate withDay(final int day) {
         return new OrderDate(day);
     }
+
+    public int getDay() {
+        return day;
+    }
 }
