@@ -2,7 +2,6 @@ package christmas.model;
 
 import static christmas.exception.ErrorType.INVALID_ORDER;
 
-import christmas.MenuType;
 import java.util.Objects;
 import java.util.regex.Pattern;
 

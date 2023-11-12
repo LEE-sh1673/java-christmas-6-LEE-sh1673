@@ -3,7 +3,6 @@ package christmas.model;
 import static christmas.exception.ErrorType.INVALID_ORDER;
 import static java.util.stream.Collectors.toMap;
 
-import christmas.MenuType;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
