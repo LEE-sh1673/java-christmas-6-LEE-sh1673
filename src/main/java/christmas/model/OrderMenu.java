@@ -1,7 +1,6 @@
 package christmas.model;
 
 import static christmas.exception.ErrorType.INVALID_ORDER;
-import static christmas.exception.ErrorType.MAX_ORDER_EXCEEDED;
 
 import christmas.MenuType;
 import java.util.Objects;
@@ -12,7 +11,6 @@ public class OrderMenu {
     private static final Pattern MENU_PATTERN = Pattern.compile("\\S+-[0-9]+");
 
     private static final int MIN_ORDER_QUANTITY = 1;
-    private static final int MAX_ORDER_QUANTITY = 20;
 
     private final Menu menu;
 
@@ -35,9 +33,6 @@ public class OrderMenu {
     private void validate(final long quantity) {
         if (quantity < MIN_ORDER_QUANTITY) {
             throw new IllegalArgumentException(INVALID_ORDER.getMessage());
-        }
-        if (quantity > MAX_ORDER_QUANTITY) {
-            throw new IllegalArgumentException(MAX_ORDER_EXCEEDED.getMessage());
         }
     }
 

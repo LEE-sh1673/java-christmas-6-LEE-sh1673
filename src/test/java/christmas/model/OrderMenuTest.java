@@ -21,14 +21,6 @@ class OrderMenuTest {
                 .hasMessageContaining(ErrorType.INVALID_ORDER.getMessage());
     }
 
-    @DisplayName("메뉴의 수량이 20개를 초과하는 경우 예외가 발생한다.")
-    @Test
-    void givenQuantityExceeded_Then_ExceptionOccurs() {
-        assertThatThrownBy(() -> new OrderMenu("티본스테이크-21"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorType.MAX_ORDER_EXCEEDED.getMessage());
-    }
-
     @DisplayName("메뉴의 형식이 '메뉴-개수' 형식이 아닌 경우 예외가 발생한다.")
     @ParameterizedTest
     @EmptySource
