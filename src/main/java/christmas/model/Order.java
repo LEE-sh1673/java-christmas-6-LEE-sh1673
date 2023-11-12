@@ -20,4 +20,8 @@ public class Order {
     public int getDay() {
         return date.getDay();
     }
+
+    public long calculateQuantity(final MenuType menuType) {
+        return menus.calculateQuantity(menuType);
+    }
 }

@@ -62,4 +62,11 @@ public class OrderMenus {
                 .mapToLong(OrderMenu::getPrize)
                 .sum();
     }
+
+    public int calculateQuantity(final MenuType menuType) {
+        return menus.stream()
+                .filter(menu -> menu.matchType(menuType))
+                .mapToInt(OrderMenu::getQuantity)
+                .sum();
+    }
 }
