@@ -1,5 +1,6 @@
 package christmas.model.event;
 
+import static christmas.model.OrderFixture.createOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.model.Order;
@@ -17,7 +18,7 @@ class SpecialDayDiscountEventTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
     void givenNoSpecialDay_Then_ZeroAmountReturns(final int weekendDay) {
-        final Order order = new Order(weekendDay, List.of("초코케이크-1"));
+        final Order order = createOrder(weekendDay, List.of("초코케이크-1"));
         assertThat(discountEvent.apply(order)).isEqualTo(DiscountPrice.ZERO);
     }
 
@@ -25,7 +26,7 @@ class SpecialDayDiscountEventTest {
     @Test
     void givenChristmasIceCream_Then_DiscountAmountReturns() {
         // given
-        final Order order = new Order(25, List.of("아이스크림-1"));
+        final Order order = createOrder(25, List.of("아이스크림-1"));
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);

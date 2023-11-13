@@ -14,11 +14,15 @@ public class OrderMenus {
 
     private final List<OrderMenu> menus;
 
-    OrderMenus(final List<String> namesWithQuantity) {
+    private OrderMenus(final List<String> namesWithQuantity) {
         this.menus = mapMenus(namesWithQuantity);
         validateDuplicate();
         validateSize();
         validateMenus();
+    }
+
+    public static OrderMenus byNamesWithQuantity(final List<String> namesWithQuantity) {
+        return new OrderMenus(namesWithQuantity);
     }
 
     private List<OrderMenu> mapMenus(final List<String> namesWithQuantity) {

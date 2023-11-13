@@ -1,5 +1,6 @@
 package christmas.model.event;
 
+import static christmas.model.OrderFixture.createOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.model.Order;
@@ -17,14 +18,14 @@ class WeekendDiscountEventTest {
     @ParameterizedTest
     @ValueSource(ints = {3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 28, 31})
     void givenDayWeekDay_Then_ZeroAmountReturns(final int weekendDay) {
-        final Order order = new Order(weekendDay, List.of("티본스테이크-1"));
+        final Order order = createOrder(weekendDay, List.of("티본스테이크-1"));
         assertThat(discountEvent.apply(order)).isEqualTo(DiscountPrice.ZERO);
     }
 
     @DisplayName("주문 일자가 주말이고 메인 메뉴가 없는 경우 할인 금액은 0원이다.")
     @Test
     void givenDayWeekendNoMain_Then_ZeroAmountReturns() {
-        final Order order = new Order(1, List.of("초코케이크-1"));
+        final Order order = createOrder(1, List.of("초코케이크-1"));
         assertThat(discountEvent.apply(order)).isEqualTo(DiscountPrice.ZERO);
     }
 
@@ -32,7 +33,7 @@ class WeekendDiscountEventTest {
     @Test
     void givenDayWeekendWithMain_Then_DiscountAmountReturns() {
         // given
-        final Order order = new Order(1, List.of("티본스테이크-1", "크리스마스파스타-2"));
+        final Order order = createOrder(1, List.of("티본스테이크-1", "크리스마스파스타-2"));
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);

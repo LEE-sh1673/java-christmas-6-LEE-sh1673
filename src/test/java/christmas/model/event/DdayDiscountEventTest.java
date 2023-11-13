@@ -1,6 +1,7 @@
 package christmas.model.event;
 
 
+import static christmas.model.OrderFixture.createOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.model.Order;
@@ -18,7 +19,7 @@ class DdayDiscountEventTest {
     @Test
     void givenDayExceeded_Then_zeroAmountReturns() {
         // given
-        final Order order = new Order(27, List.of("타파스-1"));
+        final Order order = createOrder(27, List.of("타파스-1"));
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);
@@ -35,7 +36,7 @@ class DdayDiscountEventTest {
             final long discountAmount
     ) {
         // given
-        final Order order = new Order(day, List.of("타파스-1"));
+        final Order order = createOrder(day, List.of("타파스-1"));
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);
