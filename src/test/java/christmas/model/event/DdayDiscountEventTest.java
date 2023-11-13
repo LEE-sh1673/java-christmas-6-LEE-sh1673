@@ -12,15 +12,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class DdayDiscountEventTest {
 
+    private final DiscountEvent discountEvent = new DdayDiscountEvent();
+
     @DisplayName("주문 날짜가 26일 이상이면 할인 금액은 0원이다.")
     @Test
     void givenDayExceeded_Then_zeroAmountReturns() {
         // given
-        final DiscountEvent event = new DdayDiscountEvent();
         final Order order = new Order(27, List.of("타파스-1"));
 
         // when
-        final DiscountPrice discountPrice = event.apply(order);
+        final DiscountPrice discountPrice = discountEvent.apply(order);
 
         // then
         assertThat(discountPrice).isEqualTo(DiscountPrice.ZERO);
@@ -34,11 +35,10 @@ class DdayDiscountEventTest {
             final long discountAmount
     ) {
         // given
-        final DiscountEvent event = new DdayDiscountEvent();
         final Order order = new Order(day, List.of("타파스-1"));
 
         // when
-        final DiscountPrice discountPrice = event.apply(order);
+        final DiscountPrice discountPrice = discountEvent.apply(order);
 
         // then
         assertThat(discountPrice.getAmount()).isEqualTo(discountAmount);
