@@ -29,12 +29,6 @@ public class EventBenefits {
         return EventBadge.find(calculateTotalPrize());
     }
 
-    public long calculateTotalPrize() {
-        return benefits.values()
-                .stream()
-                .reduce(0L, Long::sum);
-    }
-
     public long calculateEstimatedPaymentPrize(final Order order, final GiftMenus giftMenus) {
         final long totalOrderPrize = order.calculateTotalPrize();
         final long totalDiscountPrize = calculateTotalDiscountPrize(giftMenus);
@@ -45,6 +39,12 @@ public class EventBenefits {
         final long totalBenefitPrize = calculateTotalPrize();
         final long totalGiftMenuPrize = giftMenus.calculateTotalPrize();
         return totalBenefitPrize - totalGiftMenuPrize;
+    }
+
+    public long calculateTotalPrize() {
+        return benefits.values()
+                .stream()
+                .reduce(0L, Long::sum);
     }
 
     public Map<String, Long> getBenefits() {
