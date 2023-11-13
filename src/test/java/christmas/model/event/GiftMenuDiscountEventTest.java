@@ -23,7 +23,7 @@ class GiftMenuDiscountEventTest {
         final DiscountPrice discountPrice = discountEvent.apply(order);
 
         // when
-        assertThat(discountPrice).isEqualTo(DiscountPrice.ZERO);
+        assertThat(discountPrice.isZero()).isTrue();
     }
 
     @DisplayName("할인 전 주문 금액이 12만원 이상이면 할인 금액은 샴페인 가격이다.")

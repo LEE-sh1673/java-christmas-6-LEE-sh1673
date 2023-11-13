@@ -25,7 +25,7 @@ class DdayDiscountEventTest {
         final DiscountPrice discountPrice = discountEvent.apply(order);
 
         // then
-        assertThat(discountPrice).isEqualTo(DiscountPrice.ZERO);
+        assertThat(discountPrice.isZero()).isTrue();
     }
 
     @DisplayName("디데이 할인을 적용한다.")
