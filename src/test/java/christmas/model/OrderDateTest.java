@@ -17,4 +17,13 @@ public class OrderDateTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorType.INVALID_DATE.getMessage());
     }
+
+    @DisplayName("숫자 형식이 아닌 경우 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"sdf", "1s", "-1"})
+    void givenDayNotNumeric_Then_ExceptionOccurs(final String day) {
+        assertThatThrownBy(() -> OrderDate.withDay(day))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.INVALID_DATE.getMessage());
+    }
 }
