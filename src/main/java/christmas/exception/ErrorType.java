@@ -2,6 +2,7 @@ package christmas.exception;
 
 public enum ErrorType {
 
+    INVALID_NUMBER_FORMAT("숫자 형식이 올바르지 않습니다."),
     INVALID_DATE("유효하지 않은 날짜입니다."),
     INVALID_ORDER("유효하지 않은 주문입니다."),
     MAX_ORDER_EXCEEDED("메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다."),
