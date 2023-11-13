@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import christmas.model.GiftMenus;
 import christmas.model.Order;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,9 +31,10 @@ class EventBenefitPlannerTest {
 
         // when
         final EventBenefits benefits = planner.plan(order);
+        final Map<String, Long> benefitDetails = benefits.getBenefits();
 
         // then
-        assertThat(benefits.exists()).isFalse();
+        assertThat(benefitDetails.isEmpty()).isTrue();
     }
 
     @DisplayName("적용된 이벤트가 없으면 총 혜택 금액은 0원이다.")

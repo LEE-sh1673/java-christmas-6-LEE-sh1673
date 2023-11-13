@@ -21,10 +21,6 @@ public class EventBenefits {
         return new EventBenefits(benefits);
     }
 
-    public boolean exists() {
-        return !benefits.isEmpty();
-    }
-
     public EventBadge publishBadge() {
         return EventBadge.find(calculateTotalPrize());
     }
