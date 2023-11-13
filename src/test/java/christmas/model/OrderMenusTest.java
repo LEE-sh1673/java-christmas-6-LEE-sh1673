@@ -12,8 +12,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class OrderMenusTest {
+
+    @DisplayName("메뉴 앞 혹은 뒤에 콤마(,)가 존재하는 경우 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "시저샐러드-1,크리스마스파스타-1,", ",아이스크림-2", ",초코케이크-8,제로콜라-5,,"
+    })
+    void givenMenuEndsWithComma_Then_ExceptionOccurs(final String namesWithQuantity) {
+        assertThatThrownBy(() -> createMenus(namesWithQuantity))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.INVALID_ORDER.getMessage());
+    }
 
     @DisplayName("중복된 메뉴를 입력하는 경우 예외가 발생한다.")
     @Test

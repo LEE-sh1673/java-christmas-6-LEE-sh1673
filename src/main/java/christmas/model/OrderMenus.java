@@ -31,9 +31,14 @@ public class OrderMenus {
     }
 
     private void validateFormat(final String namesWithQuantity) {
-        if (namesWithQuantity == null || namesWithQuantity.endsWith(MENU_SPLITTER)) {
+        if (namesWithQuantity == null || startsOrEndsWithSplitter(namesWithQuantity)) {
             throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
+    }
+
+    private static boolean startsOrEndsWithSplitter(final String namesWithQuantity) {
+        return namesWithQuantity.startsWith(MENU_SPLITTER)
+                || namesWithQuantity.endsWith(MENU_SPLITTER);
     }
 
     private List<OrderMenu> mapMenus(final String namesWithQuantity) {
