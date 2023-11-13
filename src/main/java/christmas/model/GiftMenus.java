@@ -28,6 +28,12 @@ public class GiftMenus {
         return !menus.isEmpty();
     }
 
+    public long calculateTotalPrize() {
+        return menus.keySet().stream()
+                .mapToLong(menu -> menu.getPrize() * menus.get(menu))
+                .sum();
+    }
+
     public Map<GiftMenu, Long> getMenus() {
         return Collections.unmodifiableMap(menus);
     }

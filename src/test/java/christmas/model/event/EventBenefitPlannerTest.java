@@ -1,7 +1,8 @@
 package christmas.model.event;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.model.GiftMenus;
 import christmas.model.Order;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -67,15 +68,51 @@ class EventBenefitPlannerTest {
     void givenChristmasWithIceCream_Then_BenefitsReturn() {
         // given
         final Order order = new Order(25, List.of("아이스크림-2"));
+        final GiftMenus giftMenus = GiftMenus.from(order);
 
         // when
         final EventBenefits benefits = planner.plan(order);
 
         // then
         final long totalBenefitPrize = benefits.calculateTotalPrize();
-        final long estimatedPaymentPrize = order.calculateTotalPrize() - totalBenefitPrize;
+        final long estimatedPaymentPrize
+                = benefits.calculateEstimatedPaymentPrize(order, giftMenus);
 
         assertThat(totalBenefitPrize).isEqualTo(8446L);
         assertThat(estimatedPaymentPrize).isEqualTo(1554L);
+    }
+
+    @DisplayName("할인 금액이 없으면 예상 결제 금액은 할인 전 총주문 금액이다.")
+    @Test
+    void givenZeroDiscountAmount_Then_OrderPrizeReturns() {
+        // given
+        final Order order = new Order(26, List.of("제로콜라-1", "티본스테이크-1"));
+        final GiftMenus giftMenus = GiftMenus.from(order);
+
+        // when
+        final EventBenefits benefits = planner.plan(order);
+        final long estimatedPaymentPrize
+                = benefits.calculateEstimatedPaymentPrize(order, giftMenus);
+
+        // then
+        assertThat(estimatedPaymentPrize).isEqualTo(order.calculateTotalPrize());
+    }
+
+    @DisplayName("주어진 메뉴를 주문했을 때 총 할인 금액을 구한다.")
+    @Test
+    void givenOrderMenus_Then_EstimatedPaymentPrizeReturns() {
+        // given
+        final Order order = new Order(3,
+                List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2", "제로콜라-1")
+        );
+        final GiftMenus giftMenus = GiftMenus.from(order);
+
+        // when
+        final EventBenefits benefits = planner.plan(order);
+        final long estimatedPaymentPrize
+                = benefits.calculateEstimatedPaymentPrize(order, giftMenus);
+
+        // then
+        assertThat(estimatedPaymentPrize).isEqualTo(135754L);
     }
 }

@@ -1,5 +1,7 @@
 package christmas.model.event;
 
+import christmas.model.GiftMenus;
+import christmas.model.Order;
 import java.util.Collections;
 import java.util.Map;
 
@@ -27,6 +29,18 @@ public class EventBenefits {
         return benefits.values()
                 .stream()
                 .reduce(0L, Long::sum);
+    }
+
+    public long calculateEstimatedPaymentPrize(final Order order, final GiftMenus giftMenus) {
+        final long totalOrderPrize = order.calculateTotalPrize();
+        final long totalDiscountPrize = calculateTotalDiscountPrize(giftMenus);
+        return totalOrderPrize - totalDiscountPrize;
+    }
+
+    private long calculateTotalDiscountPrize(final GiftMenus giftMenus) {
+        final long totalBenefitPrize = calculateTotalPrize();
+        final long totalGiftMenuPrize = giftMenus.calculateTotalPrize();
+        return totalBenefitPrize - totalGiftMenuPrize;
     }
 
     public Map<String, Long> getBenefits() {
