@@ -5,7 +5,7 @@ import java.util.List;
 
 public class OrderFixture {
 
-    public static Order createOrder(final int day, final List<String> namesWithQuantity) {
+    public static Order createOrder(final String day, final List<String> namesWithQuantity) {
         return new Order(
                 OrderDate.withDay(day),
                 OrderMenus.byNamesWithQuantity(namesWithQuantity)

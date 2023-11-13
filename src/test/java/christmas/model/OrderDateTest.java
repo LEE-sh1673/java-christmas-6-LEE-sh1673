@@ -11,8 +11,8 @@ public class OrderDateTest {
 
     @DisplayName("1 이상 31 이하의 숫자가 아닌 경우 예외가 발생한다.")
     @ParameterizedTest
-    @ValueSource(ints = {0, 32})
-    void givenDayOutOfRange_Then_ExceptionOccurs(final int day) {
+    @ValueSource(strings = {"0", "32"})
+    void givenDayOutOfRange_Then_ExceptionOccurs(final String day) {
         assertThatThrownBy(() -> OrderDate.withDay(day))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorType.INVALID_DATE.getMessage());

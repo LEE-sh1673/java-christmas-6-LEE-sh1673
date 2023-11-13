@@ -16,8 +16,8 @@ class WeekendDiscountEventTest {
 
     @DisplayName("주문 일자가 평일인 경우 할인 금액은 0원이다.")
     @ParameterizedTest
-    @ValueSource(ints = {3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 28, 31})
-    void givenDayWeekDay_Then_ZeroAmountReturns(final int weekendDay) {
+    @ValueSource(strings = {"3", "4", "5", "6", "7", "10", "11", "12", "13", "14", "28", "31"})
+    void givenDayWeekDay_Then_ZeroAmountReturns(final String weekendDay) {
         final Order order = createOrder(weekendDay, List.of("티본스테이크-1"));
         assertThat(discountEvent.apply(order)).isEqualTo(DiscountPrice.ZERO);
     }
@@ -25,7 +25,7 @@ class WeekendDiscountEventTest {
     @DisplayName("주문 일자가 주말이고 메인 메뉴가 없는 경우 할인 금액은 0원이다.")
     @Test
     void givenDayWeekendNoMain_Then_ZeroAmountReturns() {
-        final Order order = createOrder(1, List.of("초코케이크-1"));
+        final Order order = createOrder("1", List.of("초코케이크-1"));
         assertThat(discountEvent.apply(order)).isEqualTo(DiscountPrice.ZERO);
     }
 
@@ -33,7 +33,7 @@ class WeekendDiscountEventTest {
     @Test
     void givenDayWeekendWithMain_Then_DiscountAmountReturns() {
         // given
-        final Order order = createOrder(1, List.of("티본스테이크-1", "크리스마스파스타-2"));
+        final Order order = createOrder("1", List.of("티본스테이크-1", "크리스마스파스타-2"));
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);

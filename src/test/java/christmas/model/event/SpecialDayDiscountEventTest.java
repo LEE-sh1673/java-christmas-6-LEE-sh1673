@@ -16,8 +16,8 @@ class SpecialDayDiscountEventTest {
 
     @DisplayName("이벤트 달력에 별이 없는 날이면 할인 금액은 0원이다.")
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
-    void givenNoSpecialDay_Then_ZeroAmountReturns(final int weekendDay) {
+    @ValueSource(strings = {"1", "2", "8", "9", "15", "16", "22", "23", "29", "30"})
+    void givenNoSpecialDay_Then_ZeroAmountReturns(final String weekendDay) {
         final Order order = createOrder(weekendDay, List.of("초코케이크-1"));
         assertThat(discountEvent.apply(order)).isEqualTo(DiscountPrice.ZERO);
     }
@@ -26,7 +26,7 @@ class SpecialDayDiscountEventTest {
     @Test
     void givenChristmasIceCream_Then_DiscountAmountReturns() {
         // given
-        final Order order = createOrder(25, List.of("아이스크림-1"));
+        final Order order = createOrder("25", List.of("아이스크림-1"));
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);

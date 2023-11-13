@@ -19,7 +19,7 @@ class DdayDiscountEventTest {
     @Test
     void givenDayExceeded_Then_zeroAmountReturns() {
         // given
-        final Order order = createOrder(27, List.of("타파스-1"));
+        final Order order = createOrder("27", List.of("타파스-1"));
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);
@@ -32,7 +32,7 @@ class DdayDiscountEventTest {
     @ParameterizedTest
     @CsvSource(value = {"3:1200", "25:3400"}, delimiter = ':')
     void givenDayInRage_Then_DiscountAmountReturns(
-            final int day,
+            final String day,
             final long discountAmount
     ) {
         // given
