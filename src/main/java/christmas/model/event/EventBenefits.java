@@ -25,6 +25,10 @@ public class EventBenefits {
         return !benefits.isEmpty();
     }
 
+    public EventBadge publishBadge() {
+        return EventBadge.find(calculateTotalPrize());
+    }
+
     public long calculateTotalPrize() {
         return benefits.values()
                 .stream()

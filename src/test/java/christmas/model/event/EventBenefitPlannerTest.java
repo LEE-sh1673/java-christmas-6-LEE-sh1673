@@ -115,4 +115,19 @@ class EventBenefitPlannerTest {
         // then
         assertThat(estimatedPaymentPrize).isEqualTo(135754L);
     }
+
+    @DisplayName("주어진 메뉴를 주문했을 때 발급되는 배지를 구한다.")
+    @Test
+    void givenOrderMenus_Then_EventBadgeReturns() {
+        // given
+        final Order order = new Order(3,
+                List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2", "제로콜라-1")
+        );
+
+        // when
+        final EventBenefits benefits = planner.plan(order);
+
+        // then
+        assertThat(benefits.publishBadge()).isEqualTo(EventBadge.SANTA);
+    }
 }
