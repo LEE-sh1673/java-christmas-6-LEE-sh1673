@@ -4,6 +4,7 @@ import static christmas.exception.ErrorType.INVALID_ORDER;
 import static christmas.exception.ErrorType.MAX_ORDER_EXCEEDED;
 import static christmas.exception.ErrorType.ONLY_BEVERAGE_ORDERED;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -72,5 +73,9 @@ public class OrderMenus {
                 .filter(menu -> menu.matchType(menuType))
                 .mapToInt(OrderMenu::getQuantity)
                 .sum();
+    }
+
+    public List<OrderMenu> getMenus() {
+        return Collections.unmodifiableList(menus);
     }
 }

@@ -1,5 +1,7 @@
 package christmas.model;
 
+import java.util.List;
+
 public class Order {
 
     private final OrderDate date;
@@ -21,5 +23,9 @@ public class Order {
 
     public long calculateQuantity(final MenuType menuType) {
         return menus.calculateQuantity(menuType);
+    }
+
+    public List<OrderMenu> getMenus() {
+        return menus.getMenus();
     }
 }
