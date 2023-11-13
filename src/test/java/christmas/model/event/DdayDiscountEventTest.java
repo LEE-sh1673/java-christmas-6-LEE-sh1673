@@ -5,7 +5,6 @@ import static christmas.model.OrderFixture.createOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.model.Order;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +18,7 @@ class DdayDiscountEventTest {
     @Test
     void givenDayExceeded_Then_zeroAmountReturns() {
         // given
-        final Order order = createOrder("27", List.of("타파스-1"));
+        final Order order = createOrder("27", "타파스-1");
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);
@@ -36,7 +35,7 @@ class DdayDiscountEventTest {
             final long discountAmount
     ) {
         // given
-        final Order order = createOrder(day, List.of("타파스-1"));
+        final Order order = createOrder(day, "타파스-1");
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);

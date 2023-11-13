@@ -3,7 +3,6 @@ package christmas.model;
 import static christmas.model.OrderFixture.createOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ public class GiftMenusTest {
     @Test
     void givenOrderPrice_LessThan_10000_Then_NoGiftMenuReturns() {
         // given
-        final Order order = createOrder("26", List.of("타파스-1", "제로콜라-1"));
+        final Order order = createOrder("26", "타파스-1,제로콜라-1");
 
         // when
         final GiftMenus giftMenus = GiftMenus.from(order);
@@ -28,7 +27,7 @@ public class GiftMenusTest {
     void givenOrderPrice_GreaterThan_120000_Then_ChampagneReturns() {
         // given
         final Order order = createOrder("26",
-                List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2", "제로콜라-1")
+                "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"
         );
 
         // when

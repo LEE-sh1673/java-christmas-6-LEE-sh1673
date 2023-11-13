@@ -1,8 +1,6 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
-import java.util.List;
 
 public class InputView {
 
@@ -19,9 +17,8 @@ public class InputView {
         return Console.readLine();
     }
 
-    public static List<String> readMenus() {
+    public static String readMenus() {
         System.out.println(INPUT_ORDER_MENUS);
-        final String menus = Console.readLine();
-        return Arrays.asList(menus.split(","));
+        return Console.readLine();
     }
 }

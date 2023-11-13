@@ -4,7 +4,6 @@ import static christmas.model.OrderFixture.createOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.model.Order;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +18,7 @@ class WeekdayDiscountEventTest {
     @ValueSource(strings = {"1", "2", "8", "9", "15", "16", "22", "23", "29", "30"})
     void givenDayWeekend_Then_ZeroAmountReturns(final String weekendDay) {
         // given
-        final Order order = createOrder(weekendDay, List.of("초코케이크-1"));
+        final Order order = createOrder(weekendDay, "초코케이크-1");
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);
@@ -32,7 +31,7 @@ class WeekdayDiscountEventTest {
     @Test
     void givenDayWeekdayNoDessert_Then_ZeroAmountReturns() {
         // given
-        final Order order = createOrder("3", List.of("티본스테이크-1"));
+        final Order order = createOrder("3", "티본스테이크-1");
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);
@@ -45,7 +44,7 @@ class WeekdayDiscountEventTest {
     @Test
     void givenDayWeekDayWithDessert_Then_DiscountAmountReturns() {
         // given
-        final Order order = createOrder("3", List.of("초코케이크-2", "아이스크림-1"));
+        final Order order = createOrder("3", "초코케이크-2,아이스크림-1");
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);

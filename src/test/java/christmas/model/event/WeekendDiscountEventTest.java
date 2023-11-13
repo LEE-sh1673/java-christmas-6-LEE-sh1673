@@ -19,7 +19,7 @@ class WeekendDiscountEventTest {
     @ValueSource(strings = {"3", "4", "5", "6", "7", "10", "11", "12", "13", "14", "28", "31"})
     void givenDayWeekDay_Then_ZeroAmountReturns(final String weekendDay) {
         // given
-        final Order order = createOrder(weekendDay, List.of("티본스테이크-1"));
+        final Order order = createOrder(weekendDay, "티본스테이크-1");
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);
@@ -32,7 +32,7 @@ class WeekendDiscountEventTest {
     @Test
     void givenDayWeekendNoMain_Then_ZeroAmountReturns() {
         // given
-        final Order order = createOrder("1", List.of("초코케이크-1"));
+        final Order order = createOrder("1", "초코케이크-1");
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);
@@ -45,7 +45,7 @@ class WeekendDiscountEventTest {
     @Test
     void givenDayWeekendWithMain_Then_DiscountAmountReturns() {
         // given
-        final Order order = createOrder("1", List.of("티본스테이크-1", "크리스마스파스타-2"));
+        final Order order = createOrder("1", "티본스테이크-1,크리스마스파스타-2");
 
         // when
         final DiscountPrice discountPrice = discountEvent.apply(order);

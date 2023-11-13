@@ -13,7 +13,7 @@ class OrderTest {
     @Test
     void givenMenus_Then_OrderMenusReturns() {
         // given
-        final Order order = createOrder("25", List.of("타파스-2", "시저샐러드-1", "바비큐립-1"));
+        final Order order = createOrder("25", "타파스-2,시저샐러드-1,바비큐립-1");
 
         // when
         final List<OrderMenu> orderMenus = order.getMenus();

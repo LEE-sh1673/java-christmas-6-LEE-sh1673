@@ -4,6 +4,7 @@ import static christmas.exception.ErrorType.INVALID_ORDER;
 import static christmas.exception.ErrorType.MAX_ORDER_EXCEEDED;
 import static christmas.exception.ErrorType.ONLY_BEVERAGE_ORDERED;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -11,23 +12,32 @@ import java.util.Set;
 
 public class OrderMenus {
 
+    private static final String MENU_SPLITTER = ",";
+
     private static final int MAX_QUANTITY = 20;
 
     private final List<OrderMenu> menus;
 
-    private OrderMenus(final List<String> namesWithQuantity) {
+    private OrderMenus(final String namesWithQuantity) {
+        validateFormat(namesWithQuantity);
         this.menus = mapMenus(namesWithQuantity);
         validateDuplicate();
         validateSize();
         validateMenus();
     }
 
-    public static OrderMenus byNamesWithQuantity(final List<String> namesWithQuantity) {
+    public static OrderMenus byNamesWithQuantity(final String namesWithQuantity) {
         return new OrderMenus(namesWithQuantity);
     }
 
-    private List<OrderMenu> mapMenus(final List<String> namesWithQuantity) {
-        return namesWithQuantity.stream()
+    private void validateFormat(final String namesWithQuantity) {
+        if (namesWithQuantity == null || namesWithQuantity.endsWith(MENU_SPLITTER)) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
+    }
+
+    private List<OrderMenu> mapMenus(final String namesWithQuantity) {
+        return Arrays.stream(namesWithQuantity.split(MENU_SPLITTER))
                 .map(OrderMenu::new)
                 .toList();
     }

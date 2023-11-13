@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.model.GiftMenus;
 import christmas.model.Order;
-import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +27,7 @@ class EventBenefitPlannerTest {
     @Test
     void givenOrderPrice_LessThan_10000_Then_NoEventApplied() {
         // given
-        final Order order = createOrder("25", List.of("아이스크림-1", "제로콜라-1"));
+        final Order order = createOrder("25", "아이스크림-1,제로콜라-1");
 
         // when
         final EventBenefits benefits = planner.plan(order);
@@ -42,7 +41,7 @@ class EventBenefitPlannerTest {
     @Test
     void givenOrderMenus_NoEventApplied_Then_ZeroAmountReturns() {
         // given
-        final Order order = createOrder("26", List.of("제로콜라-1", "티본스테이크-1"));
+        final Order order = createOrder("26", "제로콜라-1,티본스테이크-1");
 
         // when
         final EventBenefits benefits = planner.plan(order);
@@ -56,7 +55,7 @@ class EventBenefitPlannerTest {
     void givenOrderMenus_Then_TotalBenefitPrizeReturns() {
         // given
         final Order order = createOrder("3",
-                List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2", "제로콜라-1")
+                "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"
         );
 
         // when
@@ -70,7 +69,7 @@ class EventBenefitPlannerTest {
     @Test
     void givenChristmasWithIceCream_Then_BenefitsReturn() {
         // given
-        final Order order = createOrder("25", List.of("아이스크림-2"));
+        final Order order = createOrder("25", "아이스크림-2");
         final GiftMenus giftMenus = GiftMenus.from(order);
 
         // when
@@ -89,7 +88,7 @@ class EventBenefitPlannerTest {
     @Test
     void givenZeroDiscountAmount_Then_OrderPrizeReturns() {
         // given
-        final Order order = createOrder("26", List.of("제로콜라-1", "티본스테이크-1"));
+        final Order order = createOrder("26", "제로콜라-1,티본스테이크-1");
         final GiftMenus giftMenus = GiftMenus.from(order);
 
         // when
@@ -106,7 +105,7 @@ class EventBenefitPlannerTest {
     void givenOrderMenus_Then_EstimatedPaymentPrizeReturns() {
         // given
         final Order order = createOrder("3",
-                List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2", "제로콜라-1")
+                "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"
         );
         final GiftMenus giftMenus = GiftMenus.from(order);
 
@@ -124,7 +123,7 @@ class EventBenefitPlannerTest {
     void givenOrderMenus_Then_EventBadgeReturns() {
         // given
         final Order order = createOrder("3",
-                List.of("티본스테이크-1", "바비큐립-1", "초코케이크-2", "제로콜라-1")
+                "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"
         );
 
         // when
