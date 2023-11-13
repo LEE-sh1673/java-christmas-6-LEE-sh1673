@@ -3,7 +3,6 @@ package christmas.model.event;
 import christmas.model.Order;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,7 +29,10 @@ public class EventBenefitPlanner {
         for (final DiscountEvent event : events) {
             final String eventName = event.getName();
             final DiscountPrice discountPrice = event.apply(order);
-            benefits.put(eventName, discountPrice.getAmount());
+
+            if (!discountPrice.isZero()) {
+                benefits.put(eventName, discountPrice.getAmount());
+            }
         }
         return EventBenefits.from(benefits);
     }

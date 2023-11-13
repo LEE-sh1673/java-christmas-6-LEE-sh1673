@@ -16,6 +16,10 @@ public class DiscountPrice {
         return new DiscountPrice(amount);
     }
 
+    public boolean isZero() {
+        return amount == 0L;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
