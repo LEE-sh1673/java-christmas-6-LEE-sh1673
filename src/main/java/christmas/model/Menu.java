@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public enum Menu {
 
-    MUSHROOM_SOUP("양송이스프", 6000, MenuType.APPETIZER),
+    MUSHROOM_SOUP("양송이수프", 6000, MenuType.APPETIZER),
     TAPAS("타파스", 5500, MenuType.APPETIZER),
     CAESAR_SALAD("시저샐러드", 8000, MenuType.APPETIZER),
 
