@@ -24,20 +24,23 @@ public class EventBenefitPlanner {
         if (isLessThanMinimumPrize(order)) {
             return EventBenefits.empty();
         }
-        final Map<String, Long> benefits = new HashMap<>();
-
-        for (final DiscountEvent event : events) {
-            final String eventName = event.getName();
-            final DiscountPrice discountPrice = event.apply(order);
-
-            if (!discountPrice.isZero()) {
-                benefits.put(eventName, discountPrice.getAmount());
-            }
-        }
-        return EventBenefits.from(benefits);
+        return applyDiscountEvents(order);
     }
 
     private boolean isLessThanMinimumPrize(final Order order) {
         return order.calculateTotalPrize() < MINIMUM_ORDER_PRIZE;
+    }
+
+    private EventBenefits applyDiscountEvents(final Order order) {
+        final Map<String, Long> benefits = new HashMap<>();
+
+        for (final DiscountEvent event : events) {
+            final DiscountPrice discountPrice = event.apply(order);
+
+            if (!discountPrice.isZero()) {
+                benefits.put(event.getName(), discountPrice.getAmount());
+            }
+        }
+        return EventBenefits.from(benefits);
     }
 }
