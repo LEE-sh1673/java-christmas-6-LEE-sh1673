@@ -1,7 +1,6 @@
 package christmas.model.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import christmas.model.Order;
 import java.util.List;
