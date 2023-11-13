@@ -9,6 +9,8 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 class EventBenefitPlannerTest {
 
@@ -131,5 +133,33 @@ class EventBenefitPlannerTest {
 
         // then
         assertThat(benefits.publishBadge()).isEqualTo(EventBadge.SANTA);
+    }
+
+    @DisplayName("주어진 메뉴를 주문했을 때 총 할인 금액, 예상 결제 금액, 이벤트 배지 이름을 구한다.")
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/order.csv")
+    void givenOrderMenus_Then_AllBenefitDetailsReturns(
+            final String day,
+            final String menus,
+            final long expectedBenefitPrize,
+            final long expectedPaymentPrize,
+            final String expectedBadgeName
+    ) {
+        // given
+        final Order order = createOrder(day, menus);
+        final GiftMenus giftMenus = GiftMenus.from(order);
+
+        // when
+        final EventBenefits benefits = planner.plan(order);
+
+        final long totalBenefitPrize = benefits.calculateTotalPrize();
+        final long estimatedPaymentPrize
+                = benefits.calculateEstimatedPaymentPrize(order, giftMenus);
+        final EventBadge badge = benefits.publishBadge();
+
+        // then
+        assertThat(totalBenefitPrize).isEqualTo(expectedBenefitPrize);
+        assertThat(estimatedPaymentPrize).isEqualTo(expectedPaymentPrize);
+        assertThat(badge.getName()).isEqualTo(expectedBadgeName);
     }
 }
