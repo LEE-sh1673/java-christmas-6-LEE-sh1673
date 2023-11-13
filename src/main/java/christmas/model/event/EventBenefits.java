@@ -1,0 +1,35 @@
+package christmas.model.event;
+
+import java.util.Collections;
+import java.util.Map;
+
+public class EventBenefits {
+
+    private final Map<String, Long> benefits;
+
+    private EventBenefits(final Map<String, Long> benefits) {
+        this.benefits = benefits;
+    }
+
+    public static EventBenefits empty() {
+        return new EventBenefits(Collections.emptyMap());
+    }
+
+    public static EventBenefits from(final Map<String, Long> benefits) {
+        return new EventBenefits(benefits);
+    }
+
+    public boolean exists() {
+        return !benefits.isEmpty();
+    }
+
+    public long calculateTotalPrize() {
+        return benefits.values()
+                .stream()
+                .reduce(0L, Long::sum);
+    }
+
+    public Map<String, Long> getBenefits() {
+        return Collections.unmodifiableMap(benefits);
+    }
+}
