@@ -1,7 +1,5 @@
 package christmas.model.event;
 
-import java.util.Objects;
-
 public class DiscountPrice {
 
     public static final DiscountPrice ZERO = new DiscountPrice(0L);
@@ -18,23 +16,6 @@ public class DiscountPrice {
 
     public boolean isZero() {
         return amount == 0L;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        final DiscountPrice other = (DiscountPrice) o;
-        return amount == other.amount;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(amount);
     }
 
     public long getAmount() {
