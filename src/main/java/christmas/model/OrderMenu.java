@@ -20,7 +20,7 @@ public class OrderMenu {
         final String[] menuInfo = nameWithQuantity.split("-");
         this.menu = Menu.findMenu(menuInfo[0]);
         this.quantity = Integer.parseInt(menuInfo[1]);
-        validate(quantity);
+        validateQuantity(quantity);
     }
 
     private void validateFormat(final String name) {
@@ -29,7 +29,7 @@ public class OrderMenu {
         }
     }
 
-    private void validate(final long quantity) {
+    private void validateQuantity(final long quantity) {
         if (quantity < MIN_ORDER_QUANTITY) {
             throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
