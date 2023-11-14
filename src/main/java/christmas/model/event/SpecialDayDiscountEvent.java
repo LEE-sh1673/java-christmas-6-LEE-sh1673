@@ -5,7 +5,7 @@ import christmas.model.Order;
 public class SpecialDayDiscountEvent implements DiscountEvent {
 
     private static final String DISCOUNT_EVENT_NAME = "특별 할인";
-    private static final long INITIAL_DISCOUNT_AMOUNT = 1000L;
+    private static final long INITIAL_DISCOUNT_AMOUNT = 1_000L;
 
     private final EventCalendar calendar;
 

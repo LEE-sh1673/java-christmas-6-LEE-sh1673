@@ -5,10 +5,10 @@ import java.util.function.Predicate;
 
 public enum EventBadge {
 
-    NONE("없음", (benefitPrize) -> benefitPrize < 5000L),
-    STAR("별", (benefitPrize) -> benefitPrize >= 5000L && benefitPrize < 10000L),
-    TREE("트리", (benefitPrize) -> benefitPrize >= 10000L && benefitPrize < 20000L),
-    SANTA("산타", (benefitPrize) -> benefitPrize >= 20000L);
+    NONE("없음", (benefitPrize) -> benefitPrize < 5_000L),
+    STAR("별", (benefitPrize) -> benefitPrize >= 5_000L && benefitPrize < 10_000L),
+    TREE("트리", (benefitPrize) -> benefitPrize >= 10_000L && benefitPrize < 20_000L),
+    SANTA("산타", (benefitPrize) -> benefitPrize >= 20_000L);
 
     private final String name;
 

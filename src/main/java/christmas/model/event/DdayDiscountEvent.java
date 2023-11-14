@@ -6,7 +6,7 @@ public class DdayDiscountEvent implements DiscountEvent {
 
     private static final String DISCOUNT_EVENT_NAME = "크리스마스 디데이 할인";
     private static final int MAX_DAY = 25;
-    private static final long INITIAL_AMOUNT = 1000L;
+    private static final long INITIAL_AMOUNT = 1_000L;
     private static final long INCREASE_AMOUNT_UNIT = 100L;
 
     @Override

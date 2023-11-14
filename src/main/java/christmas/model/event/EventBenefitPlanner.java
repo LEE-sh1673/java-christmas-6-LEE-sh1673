@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class EventBenefitPlanner {
 
-    private static final long MINIMUM_ORDER_PRIZE = 10000L;
+    private static final long MINIMUM_ORDER_PRIZE = 10_000L;
 
     private final Set<DiscountEvent> events;
 
