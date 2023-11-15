@@ -4,6 +4,7 @@ import static christmas.model.OrderFixture.createOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.function.Function;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,22 +22,22 @@ class OrderTest {
         // then
         assertThat(orderMenus.size()).isEqualTo(3);
 
-        final List<String> menuNames = orderMenus.stream()
-                .map(OrderMenu::getName)
-                .toList();
-
+        final List<String> menuNames = getProperties(orderMenus, OrderMenu::getName);
         assertThat(menuNames).containsExactly("타파스", "시저샐러드", "바비큐립");
 
-        final List<Integer> quantities = orderMenus.stream()
-                .map(OrderMenu::getQuantity)
-                .toList();
-
+        final List<Integer> quantities = getProperties(orderMenus, OrderMenu::getQuantity);
         assertThat(quantities).containsExactly(2, 1, 1);
 
-        final long numberOfAppetizers = order.countQuantity(MenuType.APPETIZER);
-        final long numberOfMains = order.countQuantity(MenuType.MAIN);
+        assertThat(order.countQuantity(MenuType.APPETIZER)).isEqualTo(3L);
+        assertThat(order.countQuantity(MenuType.MAIN)).isEqualTo(1L);
+    }
 
-        assertThat(numberOfAppetizers).isEqualTo(3L);
-        assertThat(numberOfMains).isEqualTo(1L);
+    private <T> List<T> getProperties(
+            final List<OrderMenu> menus,
+            final Function<OrderMenu, T> expression
+    ) {
+        return menus.stream()
+                .map(expression)
+                .toList();
     }
 }
