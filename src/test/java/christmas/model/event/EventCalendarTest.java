@@ -35,8 +35,8 @@ class EventCalendarTest {
 
     @DisplayName("월의 날짜가 금요일과 토요일이 아니면 평일이다.")
     @ParameterizedTest
-    @ValueSource(ints = {3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28,
-            31})
+    @ValueSource(ints = {3, 4, 5, 6, 7, 10, 11, 12, 13, 14,
+            17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 31})
     void givenDayOfMonthNotFridayAndSaturday_Then_FalseReturns(final int dayOfMonth) {
         assertThat(calendar.isWeekend(dayOfMonth)).isFalse();
     }
