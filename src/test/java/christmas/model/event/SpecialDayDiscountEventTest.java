@@ -1,6 +1,7 @@
 package christmas.model.event;
 
 import static christmas.model.OrderFixture.createOrder;
+import static christmas.model.event.EventFixture.createDecemberCalendar;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.model.Order;
@@ -11,7 +12,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class SpecialDayDiscountEventTest {
 
-    private final DiscountEvent discountEvent = new SpecialDayDiscountEvent();
+    private final DiscountEvent discountEvent
+            = new SpecialDayDiscountEvent(createDecemberCalendar());
 
     @DisplayName("이벤트 달력에 별이 없는 날이면 할인 금액은 0원이다.")
     @ParameterizedTest

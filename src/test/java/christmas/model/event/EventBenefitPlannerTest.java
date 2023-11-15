@@ -1,6 +1,7 @@
 package christmas.model.event;
 
 import static christmas.model.OrderFixture.createOrder;
+import static christmas.model.event.EventFixture.createDecemberCalendar;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.model.GiftMenus;
@@ -15,13 +16,14 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 class EventBenefitPlannerTest {
 
     private static final EventBenefitPlanner planner = new EventBenefitPlanner();
+    private static final EventCalendar calendar = createDecemberCalendar();
 
     @BeforeAll
     static void setUp() {
         planner.add(new DdayDiscountEvent());
-        planner.add(new WeekdayDiscountEvent());
-        planner.add(new WeekendDiscountEvent());
-        planner.add(new SpecialDayDiscountEvent());
+        planner.add(new WeekdayDiscountEvent(calendar));
+        planner.add(new WeekendDiscountEvent(calendar));
+        planner.add(new SpecialDayDiscountEvent(calendar));
         planner.add(new GiftMenuDiscountEvent());
     }
 

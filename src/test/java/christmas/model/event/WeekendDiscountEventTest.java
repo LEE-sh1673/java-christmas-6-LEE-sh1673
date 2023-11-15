@@ -1,6 +1,7 @@
 package christmas.model.event;
 
 import static christmas.model.OrderFixture.createOrder;
+import static christmas.model.event.EventFixture.createDecemberCalendar;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.model.Order;
@@ -12,7 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class WeekendDiscountEventTest {
 
-    private final DiscountEvent discountEvent = new WeekendDiscountEvent();
+    private final DiscountEvent discountEvent = new WeekendDiscountEvent(createDecemberCalendar());
 
     @DisplayName("주문 일자가 평일인 경우 할인 금액은 0원이다.")
     @ParameterizedTest

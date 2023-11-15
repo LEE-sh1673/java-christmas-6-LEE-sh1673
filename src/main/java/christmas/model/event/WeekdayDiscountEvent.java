@@ -12,8 +12,8 @@ public class WeekdayDiscountEvent implements DiscountEvent {
 
     private final EventCalendar calendar;
 
-    public WeekdayDiscountEvent() {
-        this.calendar = EventCalendar.of(Year.of(2023), Month.DECEMBER);
+    public WeekdayDiscountEvent(final EventCalendar calendar) {
+        this.calendar = calendar;
     }
 
     @Override

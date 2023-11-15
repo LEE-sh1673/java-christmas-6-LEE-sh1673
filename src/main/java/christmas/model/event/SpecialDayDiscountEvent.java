@@ -1,8 +1,6 @@
 package christmas.model.event;
 
 import christmas.model.Order;
-import java.time.Month;
-import java.time.Year;
 
 public class SpecialDayDiscountEvent implements DiscountEvent {
 
@@ -11,8 +9,8 @@ public class SpecialDayDiscountEvent implements DiscountEvent {
 
     private final EventCalendar calendar;
 
-    public SpecialDayDiscountEvent() {
-        this.calendar = EventCalendar.of(Year.of(2023), Month.DECEMBER);
+    public SpecialDayDiscountEvent(final EventCalendar calendar) {
+        this.calendar = calendar;
     }
 
     @Override
