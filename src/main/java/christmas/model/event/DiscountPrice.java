@@ -2,7 +2,8 @@ package christmas.model.event;
 
 public class DiscountPrice {
 
-    public static final DiscountPrice ZERO = new DiscountPrice(0L);
+    private static final long ZERO_AMOUNT = 0L;
+    public static final DiscountPrice ZERO = new DiscountPrice(ZERO_AMOUNT);
 
     private final long amount;
 
@@ -15,7 +16,7 @@ public class DiscountPrice {
     }
 
     public boolean isZero() {
-        return amount == 0L;
+        return amount == ZERO_AMOUNT;
     }
 
     public long getAmount() {
