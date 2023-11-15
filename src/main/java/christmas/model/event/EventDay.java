@@ -6,8 +6,6 @@ import java.util.List;
 
 public class EventDay {
 
-    private static final List<Integer> SPECIAL_DAYS = List.of(3, 10, 17, 24, 25, 31);
-
     private final LocalDate date;
 
     public EventDay(final LocalDate date) {
@@ -19,7 +17,7 @@ public class EventDay {
         return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
     }
 
-    public boolean isSpecialDay() {
-        return SPECIAL_DAYS.contains(date.getDayOfMonth());
+    public int getDayOfMonth() {
+        return date.getDayOfMonth();
     }
 }

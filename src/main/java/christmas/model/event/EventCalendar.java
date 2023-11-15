@@ -2,6 +2,7 @@ package christmas.model.event;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class EventCalendar {
@@ -11,6 +12,8 @@ public final class EventCalendar {
 
     private static final int YEAR = 2023;
     private static final int MONTH = 12;
+
+    private static final List<Integer> SPECIAL_DAYS = List.of(3, 10, 17, 24, 25, 31);
 
     private final Map<Integer, EventDay> dates;
 
@@ -26,6 +29,7 @@ public final class EventCalendar {
     }
 
     public boolean isSpecialDay(final int dayOfMonth) {
-        return dates.get(dayOfMonth).isSpecialDay();
+        final int day = dates.get(dayOfMonth).getDayOfMonth();
+        return SPECIAL_DAYS.contains(day);
     }
 }
