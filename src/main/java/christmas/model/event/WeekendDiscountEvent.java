@@ -2,6 +2,8 @@ package christmas.model.event;
 
 import christmas.model.MenuType;
 import christmas.model.Order;
+import java.time.Month;
+import java.time.Year;
 
 public class WeekendDiscountEvent implements DiscountEvent {
 
@@ -11,7 +13,7 @@ public class WeekendDiscountEvent implements DiscountEvent {
     private final EventCalendar calendar;
 
     public WeekendDiscountEvent() {
-        this.calendar = new EventCalendar();
+        this.calendar = EventCalendar.of(Year.of(2023), Month.DECEMBER);
     }
 
     @Override
