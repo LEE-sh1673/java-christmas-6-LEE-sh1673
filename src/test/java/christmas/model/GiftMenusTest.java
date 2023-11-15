@@ -17,9 +17,10 @@ public class GiftMenusTest {
 
         // when
         final GiftMenus giftMenus = GiftMenus.from(order);
+        final Map<GiftMenu, Long> giftMenuDetails = giftMenus.getMenus();
 
         // then
-        assertThat(giftMenus.exists()).isFalse();
+        assertThat(giftMenuDetails.isEmpty()).isTrue();
     }
 
     @DisplayName("할인 전 주문 금액이 12만원 이상이면 샴페인 1개를 증정한다.")

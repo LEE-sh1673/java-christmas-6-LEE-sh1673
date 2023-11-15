@@ -24,10 +24,6 @@ public class GiftMenus {
         return new GiftMenus(menus);
     }
 
-    public boolean exists() {
-        return !menus.isEmpty();
-    }
-
     public long calculateTotalPrize() {
         return menus.keySet().stream()
                 .mapToLong(menu -> menu.getPrize() * menus.get(menu))
