@@ -83,7 +83,7 @@ public class OrderMenus {
                 .sum();
     }
 
-    public int calculateQuantity(final MenuType menuType) {
+    public int countQuantity(final MenuType menuType) {
         return menus.stream()
                 .filter(menu -> menu.matchType(menuType))
                 .mapToInt(OrderMenu::getQuantity)

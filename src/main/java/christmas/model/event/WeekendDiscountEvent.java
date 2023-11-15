@@ -26,7 +26,7 @@ public class WeekendDiscountEvent implements DiscountEvent {
         if (!calendar.isWeekend(day)) {
             return DiscountPrice.ZERO;
         }
-        final long numberOfMains = order.calculateQuantity(MenuType.MAIN);
+        final long numberOfMains = order.countQuantity(MenuType.MAIN);
         return DiscountPrice.of(INITIAL_DISCOUNT_AMOUNT * numberOfMains);
     }
 }

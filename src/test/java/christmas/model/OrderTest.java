@@ -33,8 +33,8 @@ class OrderTest {
 
         assertThat(quantities).containsExactly(2, 1, 1);
 
-        final long numberOfAppetizers = order.calculateQuantity(MenuType.APPETIZER);
-        final long numberOfMains = order.calculateQuantity(MenuType.MAIN);
+        final long numberOfAppetizers = order.countQuantity(MenuType.APPETIZER);
+        final long numberOfMains = order.countQuantity(MenuType.MAIN);
 
         assertThat(numberOfAppetizers).isEqualTo(3L);
         assertThat(numberOfMains).isEqualTo(1L);

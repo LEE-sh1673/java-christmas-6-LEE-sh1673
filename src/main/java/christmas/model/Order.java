@@ -21,8 +21,8 @@ public class Order {
         return date.getDay();
     }
 
-    public long calculateQuantity(final MenuType menuType) {
-        return menus.calculateQuantity(menuType);
+    public long countQuantity(final MenuType menuType) {
+        return menus.countQuantity(menuType);
     }
 
     public List<OrderMenu> getMenus() {
