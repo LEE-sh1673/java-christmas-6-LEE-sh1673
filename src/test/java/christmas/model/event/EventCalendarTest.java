@@ -5,9 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.exception.ErrorType;
-import java.time.MonthDay;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -37,8 +35,16 @@ class EventCalendarTest {
 
     @DisplayName("월의 날짜가 금요일과 토요일이 아니면 평일이다.")
     @ParameterizedTest
-    @ValueSource(ints = {3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 31})
+    @ValueSource(ints = {3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28,
+            31})
     void givenDayOfMonthNotFridayAndSaturday_Then_FalseReturns(final int dayOfMonth) {
         assertThat(calendar.isWeekend(dayOfMonth)).isFalse();
+    }
+
+    @DisplayName("월의 날짜가 특별한 날인지 판별한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {3, 10, 17, 24, 25, 31})
+    void givenDayOfMonth_IsSpecialDay_Then_TrueReturns(final int dayOfMonth) {
+        assertThat(calendar.isSpecialDay(dayOfMonth)).isTrue();
     }
 }
