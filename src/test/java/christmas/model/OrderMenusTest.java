@@ -84,4 +84,32 @@ class OrderMenusTest {
                 )
         );
     }
+
+    @DisplayName("주문 메뉴에서 주어진 메뉴 유형에 대한 총 수량을 구한다.")
+    @ParameterizedTest
+    @MethodSource("generateMenusWithTypeAndCount")
+    void givenOrderMenus_Then_TotalMenuQuantityReturns(
+            final MenuType menuType,
+            final int expectedMenuQuantity
+    ) {
+        // given
+        final OrderMenus orderMenus = createMenus(
+                "티본스테이크-1,시저샐러드-4,바비큐립-1,초코케이크-2,제로콜라-1"
+        );
+
+        // when
+        final int dessertCount = orderMenus.countQuantity(menuType);
+
+        // then
+        assertThat(dessertCount).isEqualTo(expectedMenuQuantity);
+    }
+
+    private static Stream<Arguments> generateMenusWithTypeAndCount() {
+        return Stream.of(
+                Arguments.of(MenuType.DESSERT, 2),
+                Arguments.of(MenuType.MAIN, 2),
+                Arguments.of(MenuType.BEVERAGE, 1),
+                Arguments.of(MenuType.APPETIZER, 4)
+        );
+    }
 }
