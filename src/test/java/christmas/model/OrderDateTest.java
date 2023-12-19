@@ -12,7 +12,7 @@ class OrderDateTest {
     @DisplayName("1 이상 31 이하의 숫자가 아닌 경우 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(ints = {0, 32})
-    void givenDayOfMonth_WhenOutOfRange_ExceptionOccurs(final int dayOfMonth) {
+    void givenDayOfMonth_WhenOutOfRange_ThenExceptionOccurs(final int dayOfMonth) {
         assertThatThrownBy(() -> OrderDate.dayOfMonth(dayOfMonth))
                 .isInstanceOf(OrderException.class);
     }

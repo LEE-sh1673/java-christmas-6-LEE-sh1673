@@ -10,7 +10,7 @@ class MenuTest {
 
     @DisplayName("존재하지 않는 메뉴인 경우 예외가 발생한다.")
     @Test
-    void givenMenuName_WhenNonExists_ExceptionOccurs() {
+    void givenMenuName_WhenNonExists_ThenExceptionOccurs() {
         assertThatThrownBy(() -> Menu.findByName("쿨피스"))
                 .isInstanceOf(OrderException.class);
     }
