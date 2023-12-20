@@ -27,4 +27,8 @@ class OrderMenu {
     static OrderMenu select(final String menu) {
         return new OrderMenu(menu);
     }
+
+    boolean isBeverage() {
+        return menu.isBeverage();
+    }
 }
