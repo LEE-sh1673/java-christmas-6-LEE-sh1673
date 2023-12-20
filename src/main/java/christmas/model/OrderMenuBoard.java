@@ -28,17 +28,8 @@ class OrderMenuBoard {
     }
 
     private List<OrderMenu> makeMenus(final String menus) {
-        final List<OrderMenu> orderMenus = Arrays.stream(menus.split(ORDER_MENU_REGEX))
+        return Arrays.stream(menus.split(ORDER_MENU_REGEX))
                 .map(OrderMenu::select)
                 .toList();
-
-        if (isAllBeverage(orderMenus)) {
-            throw new OrderException(ErrorType.MENU_ONLY_BEVERAGE);
-        }
-        return orderMenus;
-    }
-
-    private boolean isAllBeverage(final List<OrderMenu> orderMenus) {
-        return orderMenus.stream().allMatch(OrderMenu::isBeverage);
     }
 }
