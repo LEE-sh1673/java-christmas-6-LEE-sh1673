@@ -12,7 +12,7 @@ class OrderDate {
 
     private OrderDate(final int dayOfMonth) {
         if (dayOfMonth < MIN || dayOfMonth > MAX) {
-            throw new OrderException(ErrorType.INVALID_ORDER);
+            throw new OrderException(ErrorType.DATE_OUT_OR_RAGE);
         }
         this.dayOfMonth = dayOfMonth;
     }
