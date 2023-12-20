@@ -57,4 +57,8 @@ enum Menu {
     boolean isBeverage() {
         return category == MenuCategory.BEVERAGE;
     }
+
+    public long getPrize() {
+        return prize;
+    }
 }

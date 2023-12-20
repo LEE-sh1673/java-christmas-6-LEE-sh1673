@@ -31,4 +31,8 @@ class OrderMenu {
     boolean isBeverage() {
         return menu.isBeverage();
     }
+
+    int getQuantity() {
+        return quantity;
+    }
 }
