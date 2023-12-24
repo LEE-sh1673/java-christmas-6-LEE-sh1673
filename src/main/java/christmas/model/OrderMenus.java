@@ -26,7 +26,7 @@ public class OrderMenus {
 
     int totalQuantity(final List<OrderMenu> menuItems) {
         return menuItems.stream()
-                .mapToInt(OrderMenu::getQuantity)
+                .mapToInt(orderMenu -> orderMenu.getQuantity().getAmount())
                 .sum();
     }
 }
