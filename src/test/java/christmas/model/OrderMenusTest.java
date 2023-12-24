@@ -1,31 +1,22 @@
 package christmas.model;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.exception.OrderException;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 
 class OrderMenusTest {
 
-    @DisplayName("중복 메뉴를 입력한 경우 예외가 발생한다.")
-    @ParameterizedTest
-    @ValueSource(strings = {"타파스-1, 타파스-2", "바비큐립-1,초코케이크-2,제로콜라-1, 초코케이크-2"})
-    void givenMenus_WhenDuplicates_ThenExceptionOccurs(final String menus) {
+
+    //TODO: 음료 주문, 메뉴의 총 수량에 대한 검증 테스트 추가할 것
+    @DisplayName("음료만 주문하는 경우 예외가 발생한다.")
+    @Test
+    void givenMenus_WhenAllBeverage_ThenExceptionOccurs() {
+        List<OrderMenu> menus = OrderMenusFactory.createMenus("제로콜라-2,레드와인-10");
+
         assertThatThrownBy(() -> new OrderMenus(menus))
                 .isInstanceOf(OrderException.class);
-    }
-
-    @DisplayName("중복 메뉴가 없는 경우 예외가 발생하지 않는다.")
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "해산물파스타-2,레드와인-1,초코케이크-1",
-            "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"
-    })
-    void givenMenus_WhenDistinct_ThenNoExceptionOccurs(final String menus) {
-        assertThatCode(() -> new OrderMenus(menus))
-                .doesNotThrowAnyException();
     }
 }

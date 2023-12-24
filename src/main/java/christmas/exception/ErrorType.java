@@ -7,6 +7,7 @@ public enum ErrorType {
     INVALID_FORMAT_MENU("메뉴 형식이 올바르지 않습니다."),
     MENU_DUPLICATES("메뉴는 중복하여 입력할 수 없습니다."),
     MENU_ONLY_BEVERAGE("음료만 주문할 수 없습니다."),
+    INVALID_ORDER_QUANTITY("메뉴는 최소 1개 이상 주문해야 합니다."),
     ORDER_QUANTITY_EXCEEDED("주문은 최대 20개까지만 가능합니다.");
 
     private static final String PREFIX = "[ERROR] ";
