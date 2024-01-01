@@ -54,7 +54,7 @@ enum Menu {
         return menu.get();
     }
 
-    boolean isBeverage() {
-        return category == MenuCategory.BEVERAGE;
+    boolean matchCategory(final MenuCategory other) {
+        return category == other;
     }
 }

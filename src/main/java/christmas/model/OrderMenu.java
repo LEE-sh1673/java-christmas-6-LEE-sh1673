@@ -6,12 +6,20 @@ public class OrderMenu {
     private final Quantity quantity;
 
     OrderMenu(final String name, final int quantity) {
-        this.menu = Menu.findByName(name);
-        this.quantity = new Quantity(quantity);
+        this(Menu.findByName(name), new Quantity(quantity));
+    }
+
+    OrderMenu(final Menu menu, final Quantity quantity) {
+        this.menu = menu;
+        this.quantity = quantity;
     }
 
     boolean isBeverage() {
-        return menu.isBeverage();
+        return matchCategory(MenuCategory.BEVERAGE);
+    }
+
+    boolean matchCategory(final MenuCategory category) {
+        return menu.matchCategory(category);
     }
 
     Quantity getQuantity() {

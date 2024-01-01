@@ -2,6 +2,7 @@ package christmas.model;
 
 import christmas.exception.ErrorType;
 import christmas.exception.OrderException;
+import java.util.HashSet;
 import java.util.List;
 
 public class OrderMenus {
@@ -11,6 +12,9 @@ public class OrderMenus {
     private final List<OrderMenu> menus;
 
     OrderMenus(final List<OrderMenu> menus) {
+        if (isMenuDuplicated(menus)) {
+            throw new OrderException(ErrorType.MENU_DUPLICATES);
+        }
         if (isAllBeverage(menus)) {
             throw new OrderException(ErrorType.MENU_ONLY_BEVERAGE);
         }
@@ -20,13 +24,25 @@ public class OrderMenus {
         this.menus = menus;
     }
 
+    private static boolean isMenuDuplicated(final List<OrderMenu> orderMenus) {
+        return orderMenus.size() != new HashSet<>(orderMenus).size();
+    }
+
     private boolean isAllBeverage(final List<OrderMenu> menus) {
         return menus.stream().allMatch(OrderMenu::isBeverage);
     }
 
     int totalQuantity(final List<OrderMenu> menuItems) {
-        return menuItems.stream()
-                .mapToInt(orderMenu -> orderMenu.getQuantity().getAmount())
-                .sum();
+        return Quantity.sum(menuItems, OrderMenu::getQuantity).getAmount();
+    }
+
+    Quantity count(final MenuCategory category) {
+        return Quantity.sum(findBy(category), OrderMenu::getQuantity);
+    }
+
+    private List<OrderMenu> findBy(final MenuCategory category) {
+        return menus.stream()
+                .filter(orderMenu -> orderMenu.matchCategory(category))
+                .toList();
     }
 }
